@@ -73,11 +73,11 @@ elif RestingECG == "ST":
     input_restecg_ST = 1
 
 if ExcerciseAngina == ["Y"]:
-input_anginaY = 1
-input_anginaN = 0
+    input_anginaY = 1
+    input_anginaN = 0
 else:
-input_anginaY = 0
-input_anginaN = 1
+    input_anginaY = 0
+    input_anginaN = 1
 
 if ST_Slope == "Down":
     input_STslope_down = 1
