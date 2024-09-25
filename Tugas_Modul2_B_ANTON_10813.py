@@ -5,10 +5,12 @@ import os
 
 
 #Load model yang sudah dibuat dari Jupyter Notebook
-model = 'GBT_heartDisease_model.pkl'
+model_patch = 'GBT_heartDisease_model.pkl'
 
-
-with open(model,'rb') as f:
+if os.path.exists(model_path):
+    try:
+        
+with open(model_patch,'rb') as f:
     loaded_model = pickle.load(f)
 
 
