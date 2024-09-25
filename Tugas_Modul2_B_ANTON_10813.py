@@ -115,7 +115,8 @@ input_data = [[input_sex_F,input_sex_M, input_cpain_ASY,
 st.write("Data pasien yang akan diinput ke model")
 st.write(input_data)
 
-
+else:
+    st.error("File 'rf_diabetes_model.pkl' tidak ditemukan di direktori")
 #buat fungsi untuk prediksi
 if st.button("Prediksi"):
     rf_model_prediction = rf_model.predict(input_data)
