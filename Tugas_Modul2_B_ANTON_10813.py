@@ -3,7 +3,7 @@ import pickle
 import os
 
 # Load model yang sudah dibuat dari Jupyter Notebook
-model_path = os.path.join(os.getcwd(), 'GBT_heartDisease_model.pkl')
+model_path = 'GBT_heartDisease_model.pkl'
 
 with open(model_path, 'rb') as f:
     loaded_model = pickle.load(f)
@@ -13,7 +13,6 @@ rf_model = loaded_model
 # Tampilan aplikasi Streamlit
 st.title("Prediksi Potensi Penyakit Jantung")
 st.write("Aplikasi ini berguna untuk membantu mengenali potensi penyakit jantung pada manusia berusia 21 - 79 tahun")
-
 Age = st.slider("Age", 21, 79)
 Sex = st.selectbox("Gender", ["F", "M"])
 ChestPainType = st.selectbox("Chest Pain Type", ["ASY", "ATA", "NAP", "TA"])
@@ -27,8 +26,12 @@ Old_peak = st.slider("Old Peak", -3.0, 7.0, step=0.1)
 ST_Slope = st.selectbox("ST Slope", ["Down", "Flat", "Up"])
 
 # Ubah opsi input menjadi One-Hot features
-input_sex_F = 1 if Sex == "F" else 0
-input_sex_M = 1 if Sex == "M" else 0
+if Sex == "F":
+    input_sex_F = 1
+    input_sex_M = 0
+elif Sex == "M":
+    input_sex_F = 0
+    input_sex_M = 1
 
 if ChestPainType == "ASY":
     input_cpain_ASY = 1
@@ -51,7 +54,10 @@ elif ChestPainType == "TA":
     input_cpain_NAP = 0
     input_cpain_TA = 1
 
-input_fastbs = 1 if FastingBS == "1" else 0
+if FastingBS == 0: 
+    input_fastbs = 0
+else:
+    input_fastbs = 1
 
 if RestingECG == "LVH":
     input_restecg_LVH = 1
@@ -66,8 +72,12 @@ elif RestingECG == "ST":
     input_restecg_Normal = 0
     input_restecg_ST = 1
 
-input_anginaY = 1 if ExcerciseAngina == "Y" else 0
-input_anginaN = 0 if ExcerciseAngina == "Y" else 1
+if ExcerciseAngina == ["Y"]:
+input_anginaY = 1
+input_anginaN = 0
+else:
+input_anginaY = 0
+input_anginaN = 1
 
 if ST_Slope == "Down":
     input_STslope_down = 1
